@@ -4,12 +4,13 @@ import { useAuth } from "./hooks/useAuth";
 import { Route, Routes } from "react-router-dom";
 import { Home, Login, Signup, Upload } from "./pages";
 import { useMainContext } from "./context/MainContext";
+import { PrivateRoute } from "./helpers/PrivateRoute";
 
 const App = () => {
   const { refresh } = useAuth();
   const { loading } = useMainContext();
   const userLogged = localStorage.getItem("userLoggedIn");
-  
+
   useEffect(() => {
     (async () => {
       if (userLogged === "true") {
@@ -23,7 +24,9 @@ const App = () => {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/upload" element={<Upload />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/upload" element={<Upload />} />
+        </Route>
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signup" element={<Signup />} />
       </Routes>

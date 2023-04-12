@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://ldyu7hkm73.execute-api.us-east-1.amazonaws.com/dev/",
+  baseURL: "https://vc3xdqdr66.execute-api.us-east-1.amazonaws.com/dev/",
 });
 
 export const getAPI = async (url: string, token: string | undefined) => {

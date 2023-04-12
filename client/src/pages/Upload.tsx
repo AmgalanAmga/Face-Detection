@@ -2,13 +2,12 @@ import Lottie from "lottie-react";
 import Webcam from "react-webcam";
 import { motion } from "framer-motion";
 import { FiCamera } from "react-icons/fi";
+import { useData } from "../hooks/useData";
 import { useUpload } from "../hooks/useUpload";
 import Attendance from "../assets/attendance.json";
 import { convertIntoObject } from "../utils/convertIntoObject";
 import { useRef, useState, useCallback, FormEvent } from "react";
 import { UploadHeader, Success, AlreadyRegistered } from "../components";
-import { useData } from "../hooks/useData";
-import { object } from "yup";
 
 export const Upload = () => {
   const { queryData } = useData();
