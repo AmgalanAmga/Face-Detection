@@ -1,0 +1,85 @@
+function1:
+  handler: src/auth/signup.handler
+  name: CreateNewStudent
+  events:
+    - http:
+        path: /auth/register
+        method: POST
+        cors:
+          origin: ${self:custom.origin}
+          headers:
+            - "*"
+
+function2:
+  handler: src/auth/login.handler
+  name: StudentsLogin
+  events:
+    - http:
+        path: /auth/login
+        method: POST
+        cors:
+          origin: ${self:custom.origin}
+          headers:
+            - "*"
+
+function3:
+  handler: src/auth/refresh.handler
+  name: StudentsRefresh
+  events:
+    - http:
+        path: /auth/refresh
+        method: GET
+        cors:
+          origin: ${self:custom.origin}
+          headers:
+            - "*"
+
+function4:
+  handler: src/upload/generateURL.handler
+  name: GeneratePreSignedURL
+  events:
+    - http:
+        path: /upload
+        method: GET
+        cors:
+          origin: ${self:custom.origin}
+          headers:
+            - "*"
+
+function5:
+  handler: src/upload/targetTrigger.handler
+  name: TargetTrigger
+  events:
+    - s3:
+        bucket: ${self:custom.studentsPhotosBucket}
+        event:
+          - s3:ObjectCreated:Put
+        rules:
+          - prefix: target
+          - suffix: .jpeg
+        existing: true
+
+function6:
+  handler: src/upload/dailyTrigger.handler
+  name: DailyTrigger
+  events:
+    - s3:
+        bucket: ${self:custom.studentsPhotosBucket}
+        event:
+          - s3:ObjectCreated:Put
+        rules:
+          - prefix: daily
+          - suffix: .jpeg
+        existing: true
+
+function7:
+  handler: src/database/scanData.handler
+  name: ScanAttendance
+  events:
+    - http:
+        path: /scanAttendance
+        method: GET
+        cors:
+          origin: ${self:custom.origin}
+          headers:
+            - "*"

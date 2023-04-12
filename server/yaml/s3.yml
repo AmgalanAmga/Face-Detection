@@ -1,0 +1,28 @@
+Resources:
+  StudentsPhotoBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${self:custom.studentsPhotosBucket}
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - "*"
+            AllowedMethods:
+              - GET
+              - PUT
+            AllowedOrigins:
+              - ${self:custom.origin}
+  PolicyStudentsPhotosBucket:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref StudentsPhotoBucket
+      PolicyDocument:
+        Statement:
+          - Action:
+              - s3:GetObject
+              - s3:PutObject
+            Effect: Allow
+            Resource:
+              - arn:aws:s3:::${self:custom.studentsPhotosBucket}
+              - arn:aws:s3:::${self:custom.studentsPhotosBucket}/*
+            Principal: "*"

@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer components {
+  .flexItemCenter {
+    @apply flex items-center;
+  }
+  .flexColItemCenter {
+    @apply flex flex-col items-center;
+  }
+  .perfectCenter {
+    @apply flex items-center justify-center;
+  }
+  .flexColPerfect {
+    @apply flex flex-col items-center justify-center;
+  }
+  .absoluteCenter {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+}
+
+@layer components {
+  .formContainer {
+    @apply w-96 bg-white rounded-lg;
+  }
+  .authContainer {
+    @apply w-full min-h-screen bg-authBackImage bg-cover bg-center;
+  }
+  .textLinear {
+    @apply py-1.5 text-6xl font-bold bg-gradient-to-r from-[#0198CC] to-[#6701CC] bg-clip-text text-transparent;
+  }
+  .homeAuthBtn {
+    @apply flex-1 bg-[#A28CCD] text-3xl text-white text-center font-semibold py-3 rounded-lg duration-200 hover:bg-[#7F69E8];
+  }
+  .loginInput {
+    @apply w-full py-3.5 px-4 placeholder:text-[#9e969c] leading-[22px] border border-[#dddfe2] rounded-md focus:outline-blue-400 focus:shadow-loginInput;
+  }
+  .authButton {
+    @apply w-full text-xl text-[#ffffff] font-semibold leading-10 bg-[#1877f2] rounded-md active:bg-blue-600;
+  }
+  .container {
+    @apply w-[600px] h-[600px] border-2 border-slate-500 overflow-hidden rounded-xl;
+  }
+  .button {
+    @apply border border-gray-400 bg-gray-300 py-1 px-3 rounded-md hover:bg-gray-400 hover:text-white duration-200;
+  }
+}

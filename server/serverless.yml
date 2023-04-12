@@ -1,0 +1,37 @@
+service: server
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - rekognition:IndexFaces
+        - rekognition:SearchFacesByImage
+      Resource:
+        - "*"
+        - !GetAtt StudentsTable.Arn
+        - !GetAtt AttendanceTable.Arn
+        - !Sub "${StudentsTable.Arn}/*"
+        - !Sub "${AttendanceTable.Arn}/*"
+
+  environment:
+    STUDENTSTABLE: ${self:custom.studentsTable}
+    COLLECTIONTABLE: ${self:custom.collectionTable}
+    ATTENDANCETABLE: ${self:custom.attendanceTable}
+
+custom:
+  studentsTable: StudentsTable
+  origin: "http://localhost:3000"
+  collectionTable: CollectionTable
+  attendanceTable: AttendanceTable
+  studentsPhotosBucket: studentsphotosbucket
+
+functions: ${file(yaml/lambda.yml)}
+resources:
+  - ${file(yaml/s3.yml)}
+  - ${file(yaml/dynamodb.yml)}
