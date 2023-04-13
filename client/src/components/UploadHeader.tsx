@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 import { Dispatch, RefObject, SetStateAction } from "react";
 
 type UploadHeaderProps = {
@@ -18,6 +19,7 @@ export const UploadHeader = ({
   setCapturedImg,
   setSelectedImgUrl,
 }: UploadHeaderProps) => {
+  const navigate = useNavigate();
   const registerAttendance = () => {
     if (!onCamera) {
       setOnCamera(true);
@@ -43,6 +45,7 @@ export const UploadHeader = ({
   };
 
   const logout = () => {
+    navigate("/");
     Cookies.remove("userToken");
     localStorage.setItem("userLoggedIn", "false");
   };

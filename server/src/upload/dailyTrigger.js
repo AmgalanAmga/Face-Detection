@@ -23,7 +23,7 @@ module.exports.handler = async (event) => {
     Key: marshall({ faceId }),
   });
   const lessonStarts = new Date();
-  lessonStarts.setHours(5, 0, 0);
+  lessonStarts.setHours(13, 0, 0);
   const currentTime = Date.now();
   const substractedTime = (currentTime - lessonStarts.getTime()) / 60000;
   if (substractedTime < 0) {
